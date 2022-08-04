@@ -16,12 +16,12 @@ RUN mkdir -p /transmission/downloads \
   	&& mkdir -p /transmission/incomplete \
   	&& mkdir -p /etc/transmission-daemon
 
-RUN mkdir -p /transmission/config \
-    && chmod -R 1777 /transmission
+COPY src/ .
 
 EXPOSE 9091 51413/tcp 51413/udp
 
-STOPSIGNAL SIGTERM
+ENV USERNAME admin
+ENV PASSWORD password
 
 RUN chmod +x /start-transmission.sh
 CMD ["/start-transmission.sh"]
