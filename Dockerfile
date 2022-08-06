@@ -14,16 +14,13 @@ RUN rm -rf \
 
 RUN mkdir -p /transmission/downloads \
   	&& mkdir -p /transmission/incomplete \
-  	&& mkdir -p /etc/transmission-daemon
+  	&& mkdir -p /etc/transmission-daemon \
+  	&& mkdir -p /transmission/watch
 
 COPY src/ .
 
 EXPOSE 9091 51413/tcp 51413/udp
 
-ENV USERNAME admin
-ENV PASSWORD password
-
 RUN chmod +x /start-transmission.sh
-CMD ["/start-transmission.sh"]
 
-#ENTRYPOINT ["/usr/bin/transmission-daemon", "--foreground", "--config-dir", "/transmission/config"]
+CMD ["/start-transmission.sh"]
